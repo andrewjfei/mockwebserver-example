@@ -16,6 +16,8 @@ import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -24,6 +26,7 @@ public class MockWebServerTest {
     private MockWebServer mockWebServer;
     private HttpUrl baseUrl;
 
+    private final Logger LOGGER = LoggerFactory.getLogger(MockWebServerTest.class);
     private final String BASE_PATH = "/api/v1";
     private final String RESPONSE_PAYLOAD = "Hello, World!";
 
@@ -36,6 +39,8 @@ public class MockWebServerTest {
 
         // Setting the REST API base URL
         baseUrl = mockWebServer.url(BASE_PATH);
+
+        LOGGER.info(baseUrl.toString());
 
         Dispatcher dispatcher = new Dispatcher() {
             @NotNull
